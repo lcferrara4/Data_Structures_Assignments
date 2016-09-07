@@ -51,7 +51,7 @@ void LinkedList<T>::print(){
 }
 
 template <typename T>
-LinkedList<T> findListSum (LinkedList<T> *, LinkedList<T> *);
+LinkedList<T> findListSum (LinkedList<T> *, LinkedList<T> *, LinkedList<T> *);
 
 // Main Execution
 
@@ -86,7 +86,7 @@ int main(int argc, char *argv[]) {
 		}
 
         	// Add
-		sum = findListSum( &list1, &list2 );        
+		sum = findListSum( &list1, &list2, &sum );        
 
         	// Print result
 		sum.print();
@@ -102,10 +102,9 @@ int main(int argc, char *argv[]) {
 
 // function to find the sum of two lists
 template <typename T>
-LinkedList<T> findListSum (LinkedList<T>* list1, LinkedList<T>* list2){
+LinkedList<T> findListSum (LinkedList<T>* list1, LinkedList<T>* list2, LinkedList<T>* sumList){
 
-	LinkedList<char> sumList;
-	sumList.head.next = nullptr;
+	sumList->head.next = nullptr;
 	char carryOut = '0';
 	int longer = 0;
 	string sum;	
@@ -125,7 +124,7 @@ LinkedList<T> findListSum (LinkedList<T>* list1, LinkedList<T>* list2){
 			carryOut = '0';
 			digit = sum[0];
 		}
-		sumList.push_front(digit);
+		sumList->push_front(digit);
 	
 		// check for differences in lengths of linked lists	
 		if (curr->next == nullptr && curr2-> next != nullptr){
@@ -160,7 +159,7 @@ LinkedList<T> findListSum (LinkedList<T>* list1, LinkedList<T>* list2){
                 	}
 			
 			// add digit to sum 
-                       	sumList.push_front(digit);
+                       	sumList->push_front(digit);
                         curr = curr->next;
                 }
 
@@ -179,7 +178,7 @@ LinkedList<T> findListSum (LinkedList<T>* list1, LinkedList<T>* list2){
                                 digit = sum[0];
                         }
                           
-			sumList.push_front(digit);
+			sumList->push_front(digit);
 			curr2 = curr2->next;
 		}
 	
@@ -187,8 +186,8 @@ LinkedList<T> findListSum (LinkedList<T>* list1, LinkedList<T>* list2){
 
 	// add extra carry out
 	if (carryOut != '0'){
-		sumList.push_front(carryOut);
+		sumList->push_front(carryOut);
 	}	
 
-	return sumList;	
+	return *sumList;	
 }
