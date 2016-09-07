@@ -51,7 +51,7 @@ void LinkedList<T>::print(){
 }
 
 template <typename T>
-LinkedList<T> findListSum (LinkedList<T> &, LinkedList<T> &, LinkedList<T> &);
+LinkedList<T>& findListSum (LinkedList<T> &, LinkedList<T> &, LinkedList<T> &);
 
 // Main Execution
 
@@ -103,7 +103,7 @@ int main(int argc, char *argv[]) {
 
 // function to find the sum of two lists
 template <typename T>
-LinkedList<T> findListSum (LinkedList<T>& list1, LinkedList<T>& list2, LinkedList<T>& sumList){
+LinkedList<T>& findListSum (LinkedList<T>& list1, LinkedList<T>& list2, LinkedList<T>& sumList){
 
 	char carryOut = '0';
 	int longer = 0;
