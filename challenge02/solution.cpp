@@ -51,7 +51,7 @@ void LinkedList<T>::print(){
 }
 
 template <typename T>
-LinkedList<T> findListSum (LinkedList<T> *, LinkedList<T> *, LinkedList<T> *);
+LinkedList<T> findListSum (LinkedList<T> &, LinkedList<T> &, LinkedList<T> &);
 
 // Main Execution
 
@@ -65,6 +65,7 @@ int main(int argc, char *argv[]) {
 	list2.head.next = nullptr;
 
 	LinkedList<char> sum;
+	sum.head.next = nullptr;
 
     	string integer1;
     	string integer2;
@@ -86,7 +87,7 @@ int main(int argc, char *argv[]) {
 		}
 
         	// Add
-		sum = findListSum( &list1, &list2, &sum );        
+		sum = findListSum( list1, list2, sum );        
 
         	// Print result
 		sum.print();
@@ -102,18 +103,17 @@ int main(int argc, char *argv[]) {
 
 // function to find the sum of two lists
 template <typename T>
-LinkedList<T> findListSum (LinkedList<T>* list1, LinkedList<T>* list2, LinkedList<T>* sumList){
+LinkedList<T> findListSum (LinkedList<T>& list1, LinkedList<T>& list2, LinkedList<T>& sumList){
 
-	sumList->head.next = nullptr;
 	char carryOut = '0';
 	int longer = 0;
 	string sum;	
 	char digit;
 
-	Node<char>* curr2 = list2->head.next;
+	Node<char>* curr2 = list2.head.next;
 	Node<char>* curr;
 	
-	for (curr = list1->head.next; curr != nullptr; curr = curr->next){
+	for (curr = list1.head.next; curr != nullptr; curr = curr->next){
 	
 		sum = to_string((curr->data - '0') + (curr2->data - '0') + (carryOut - '0'));
 		if (sum.length() > 1){
@@ -124,7 +124,7 @@ LinkedList<T> findListSum (LinkedList<T>* list1, LinkedList<T>* list2, LinkedLis
 			carryOut = '0';
 			digit = sum[0];
 		}
-		sumList->push_front(digit);
+		sumList.push_front(digit);
 	
 		// check for differences in lengths of linked lists	
 		if (curr->next == nullptr && curr2-> next != nullptr){
@@ -159,7 +159,7 @@ LinkedList<T> findListSum (LinkedList<T>* list1, LinkedList<T>* list2, LinkedLis
                 	}
 			
 			// add digit to sum 
-                       	sumList->push_front(digit);
+                       	sumList.push_front(digit);
                         curr = curr->next;
                 }
 
@@ -178,7 +178,7 @@ LinkedList<T> findListSum (LinkedList<T>* list1, LinkedList<T>* list2, LinkedLis
                                 digit = sum[0];
                         }
                           
-			sumList->push_front(digit);
+			sumList.push_front(digit);
 			curr2 = curr2->next;
 		}
 	
@@ -186,8 +186,8 @@ LinkedList<T> findListSum (LinkedList<T>* list1, LinkedList<T>* list2, LinkedLis
 
 	// add extra carry out
 	if (carryOut != '0'){
-		sumList->push_front(carryOut);
+		sumList.push_front(carryOut);
 	}	
 
-	return *sumList;	
+	return sumList;	
 }
