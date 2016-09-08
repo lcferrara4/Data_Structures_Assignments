@@ -33,8 +33,8 @@ template <typename T>
 void LinkedList<T>::empty(){
 	Node<T>* tmp;
 	Node<T>* curr;
-	for (curr = head.next; curr != nullptr; curr = curr->next){
-		tmp = curr;
+	for (curr = head.next; curr != nullptr; ){
+		tmp = curr -> next;
 		delete(curr);
 		curr = tmp;
 	}
