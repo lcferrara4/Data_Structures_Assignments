@@ -33,8 +33,8 @@ template <typename T>
 void LinkedList<T>::empty(){
 	Node<T>* tmp;
 	Node<T>* curr;
-	for (curr = head.next; curr != nullptr; curr = curr->next){
-		tmp = curr;
+	for (curr = head.next; curr != nullptr; ){
+		tmp = curr -> next;
 		delete(curr);
 		curr = tmp;
 	}
@@ -51,7 +51,7 @@ void LinkedList<T>::print(){
 }
 
 template <typename T>
-LinkedList<T> findListSum (LinkedList<T>, LinkedList<T>);
+LinkedList<T>& findListSum (LinkedList<T> &, LinkedList<T> &, LinkedList<T> &);
 
 // Main Execution
 
@@ -65,6 +65,7 @@ int main(int argc, char *argv[]) {
 	list2.head.next = nullptr;
 
 	LinkedList<char> sum;
+	sum.head.next = nullptr;
 
     	string integer1;
     	string integer2;
@@ -86,7 +87,7 @@ int main(int argc, char *argv[]) {
 		}
 
         	// Add
-		sum = findListSum( list1, list2 );        
+		sum = findListSum( list1, list2, sum );        
 
         	// Print result
 		sum.print();
@@ -102,10 +103,8 @@ int main(int argc, char *argv[]) {
 
 // function to find the sum of two lists
 template <typename T>
-LinkedList<T> findListSum (LinkedList<T> list1, LinkedList<T> list2){
+LinkedList<T>& findListSum (LinkedList<T>& list1, LinkedList<T>& list2, LinkedList<T>& sumList){
 
-	LinkedList<char> sumList;
-	sumList.head.next = nullptr;
 	char carryOut = '0';
 	int longer = 0;
 	string sum;	
