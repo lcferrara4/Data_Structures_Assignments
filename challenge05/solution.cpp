@@ -1,7 +1,6 @@
 // Challenge 05: BST
 #include <iostream>
 #include <vector>
-#include <stddef.h>
 
 using namespace std;
 
